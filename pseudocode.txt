@@ -1,0 +1,268 @@
+scenario_1,2,3,4,5
+
+calculate profiles based on the status of other nodes
+    if forming to destination -> calculate profiles base on destination
+    else if real target is being detected -> add real target profiles
+    else if virtual target is being -> add virtual target profiles
+
+if tentacle_state is forming
+  	if node_state is free
+    		if node is equilibrium -> change node_state to tip
+    		if connected with destination/real target -> change node_state to backbone
+    					      	        change tentacle_state to complete
+  	if node_state is tip
+    		if adjacent node is to be a new tip -> change node_state to backbone
+    		if directly connected with destination/real target -> change node_state to backbone
+    					     		                                        change tentacle_state to complete
+    		if get the message that tentacle is connected with destination/real target -> change node_state to backbone
+    					     					                                                          change tentacle_state to complete
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_6,7,8
+
+if tentacle_state is damaged
+    if node_stae is backbone
+  	    if is_end_backbone_node -> change node_state to tip
+  	hold position for 30 se conds
+  	if after 30 seconds
+    		change tentacle_state to forming
+    		if is_not_connected with origin ->change node_state to orphan
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_9,10
+
+if node_state is orphan
+    when connected with forming tentacle -> change node_state to free
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_11,12
+
+if tentacle_state is forming
+  	if node_state is free
+  		  if both side adjacent nodes are tip -> change node_state to backbone
+  	if node_state is tip
+  		  if backbone condition is satisfied -> change node_state to backbone
+  	if node_state is backbone
+  		  if tentacle is connected with destination ->  change tentacle to complete
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_13
+
+if tentacle_state is complete
+    if node_state is free -> change node_state to extra
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_14
+if tentalce_state is complete
+    if node_state is extra
+      	if anchoring
+      		  if djacent with both side nodes adjacent with the anchored backnode -> change node_state to reinforce
+      								                     change tentacle_staet to reinforcing
+      	else
+      		  when at connected with backbone node
+      			     if the backbone is not anchored/reinforced -> start anchoring the backbone node
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_15
+
+if tentacle_state is reinforcing
+  	if node_state is free -> change node_state to extra
+  	if node_state is extra
+  		  if anchoring
+  			     if djacent with both side nodes adjacent with the anchored backnode -> change node_state to reinforce
+  								                                                                  change tentacle_staet to reinforcing
+  		  else
+  			     when at connected with backbone node
+  				        if the backbone is not anchored/reinforced -> start anchoring the backbone node
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_16,17,18,19,20
+
+if tentacle_state is damaged
+  	if node_state is extra
+  		  change node_state to free
+  		  if connected with origin -> change tentacle_state to forming
+  		  else -> activate temp destination
+
+if tentalce_state is damaged
+  	if node_state is reinforce
+  		  if the damaged node id is my backbone -> change node_state to backbone
+  			                                         change tentacle_state to complete
+  						                                   move to the backbone position
+
+		else
+  			change node_state to free
+  			if connected with origin -> change tentacle_state to forming
+  			else -> activate temp destination
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_19
+
+if tentalce_state is damaged
+  	if node_state is reinforce
+  		  if the damaged node id is my backbone -> change node_state to backbone
+  						                                   change tentacle_state to complete
+  			                                         move to the backbone position
+  if node_state is reinforce
+  		if not djacent with both side nodes adjacent with the anchored backnode -> change node_state to extra
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario 22,23
+
+if tentalce_state is damaged
+  	if tentacle has more than two reinforce nodes
+  		  if node_state is reinforce
+  			   if the damaged node id is my backbone -> change node_state to backbone
+  			                                            change tentacle_state to complete
+  						        	                            move to the backbone position
+
+  		     else if I'm nearest with damaged node -> change node_state to free
+  				      if connected with origin -> change tentacle_state to forming
+  						  else -> activate temp destination
+
+	  else
+		    if node_state is reinforce
+			       if the damaged node id is my backbone -> change node_state to backbone
+			                                            	  change tentacle_state to complete
+						                                          move to the backbone position
+
+			  else
+				     change node_state to free
+				     if connected with origin -> change tentacle_state to forming
+				     else -> activate temp destination
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_24
+
+if tentalce_state is damaged
+
+	if tentacle has more than two reinforce nodes
+  		if node_state is extra -> change node_state to free
+
+  		if node_state is reinforce
+  			   if the damaged node id is my backbone -> change node_state to backbone
+  			                                            change tentacle_state to complete
+  						        	                            move to the backbone position
+
+  			   else if I'm nearest with damaged node -> change node_state to free
+  							if connected with origin -> change tentacle_state to forming
+  							else -> activate temp destination
+
+	else
+		  if node_state is reinforce
+  			   if the damaged node id is my backbone -> change node_state to backbone
+  			                                          change tentacle_state to complete
+  						                                    move to the backbone position
+
+    			 else
+        				change node_state to free
+        				if connected with origin -> change tentacle_state to forming
+        				else -> activate temp destination
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+scenario_25
+
+if tentalce_state is complete
+    if there are next destiantions -> change tentacle_state to next destination
+
+if tentacle_state is next destination
+    if node_state is free -> change state of the new tentacle to forming
+			                       set next destination to the destinatnion
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+calculate profiles based on the status of other nodes
+   	  if forming to destination -> calculate profiles base on destination
+      elif real target is being detected -> add real target profiles
+      elif virtual target is being -> add virtual target profiles
+
+if node_state is orphan
+    	when connected with forming tentacle -> change node_state to free
+
+if tentacle_state is forming
+    	if node_state is free
+    		   if both side adjacent nodes are tip -> change node_state to backbone
+      		 if node is equilibrium -> change node_state to tip
+      		 if connected with destination/real target -> change node_state to backbone
+      					      	                                change tentacle_state to complete
+    	if node_state is tip
+      		 if backbone condition is satisfied -> change node_state to backbone
+           if adjacent node is to be a new tip -> change node_state to backbone
+           if directly connected with destination/real target -> change node_state to backbone
+          					     		                                     change tentacle_state to complete
+           if get the message that tentacle is connected with destination/real target -> change node_state to backbone
+
+      if node_state is backbone
+  		     if tentacle is connected with destination ->  change tentacle to complete
+
+if tentalce_state is complete
+    	if node_state is extra
+          		if anchoring
+            		  	if djacent with both side nodes adjacent with the anchored backnode -> change node_state to reinforce
+            								                                                               change tentacle_staet to reinforcing
+          		else
+            		  	when at connected with backbone node
+            			     	if the backbone is not anchored/reinforced -> start anchoring the backbone node
+    	if there are next destiantions -> change tentacle_state to next destination
+
+if tentacle_state is damaged
+
+  	if node_state is extra
+  		    change node_state to free
+  		    if connected with origin -> change tentacle_state to forming
+  		    else -> activate temp destination
+
+  	elif node_state is reinforce
+  		    if not djacent with both side nodes adjacent with the anchored backnode -> change node_state to extra
+
+		      elif the damaged node id is my backbone -> change node_state to backbone
+  			                                             change tentacle_state to complete
+  						                                       move to the backbone position
+    		  else
+        		 	if tentacle has more than two reinforce nodes
+            				if I'm nearest with damaged node -> change node_state to free
+              				    if connected with origin -> change tentacle_state to forming
+              				    else -> activate temp destination
+        			else
+            				change node_state to free
+                  	if connected with origin -> change tentacle_state to forming
+                  	else -> activate temp destination
+
+    else
+      		if node_state is backbone
+        			  if is_end_backbone_node -> change node_state to tip
+
+        	hold position for 30 seconds
+        	if after 30 seconds
+            		change tentacle_state to forming
+            		if is_not_connected with origin ->change node_state to orphan
+
+if tentacle_state is reinforcing
+      	if node_state is free -> change node_state to extra
+      	if node_state is extra
+          		  if anchoring
+          			     if djacent with both side nodes adjacent with the anchored backnode -> change node_state to reinforce
+          								                                       change tentacle_staet to reinforcing
+          		  else
+          			     when at connected with backbone node
+          				        if the backbone is not anchored/reinforced -> start anchoring the backbone node
+
+if tentacle_state is next destination
+      	if node_state is free -> change state of the new tentacle to forming
+      			    set next destination to the destinatnion
+
+
+set_next_position
