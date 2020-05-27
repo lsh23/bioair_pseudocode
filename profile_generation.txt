@@ -1,0 +1,45 @@
+for node in adjacent nodes
+
+	if node.state is Desination
+		caculate profile 
+
+	if node.state is Origin
+		
+		if There are not further Backbone 
+									or tip nodes on same tentacle 
+									or My position within tentacle is first position
+			caculate profile
+		
+		if self.state is Tip or self.state is Backbone
+			caculate profile to o_x,o_y
+	
+	if node.state is Tip
+		
+		if self.state is Tip or self.state is Backbone
+			caculate profile
+
+	if node.state is Backbone
+		
+		if self.state is Tip or self.state is Backbone 
+													and My position is further than the adjcent backbone node 
+			caculate profile to o_x,o_y
+
+		if self.state is Tip or self.state is Backbone
+													and My position is nearest further node of the adjacent backbone node
+									or 	self.state is not Tip or self.state is not Backbone
+																and the adjacent backbone node is my nearest further node 
+																and within same tentacle
+
+									or	self.state is Reinforce
+	    	
+			caculate profile
+	
+	if node.state is Extra or node.state is Reinforce
+
+		if self.state is Extra or self.state is Reinforce
+			caculate profile
+
+	if node.state is Free
+
+		if self.state if Free
+			caculate profile
