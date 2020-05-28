@@ -42,7 +42,7 @@ for node in adjacent nodes
 
 
 condition = self.is_connected_with_destination + self.is_detecing_real_target + self.have_virtual_target
-						1								2								   4
+				1				2			   4
 
 if condition == 3
 	caculate and add real target profile
