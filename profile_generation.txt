@@ -6,8 +6,8 @@ for node in adjacent nodes
 	if node.state is Origin
 		
 		if There are not further Backbone 
-									or tip nodes on same tentacle 
-									or My position within tentacle is first position
+				or tip nodes on same tentacle 
+				or My position within tentacle is first position
 			caculate profile
 		
 		if self.state is Tip or self.state is Backbone
@@ -21,16 +21,12 @@ for node in adjacent nodes
 	if node.state is Backbone
 		
 		if self.state is Tip or self.state is Backbone 
-													and My position is further than the adjcent backbone node 
+					and My position is further than the adjcent backbone node 
 			caculate profile to o_x,o_y
 
-		if self.state is Tip or self.state is Backbone
-													and My position is nearest further node of the adjacent backbone node
-									or 	self.state is not Tip or self.state is not Backbone
-																and the adjacent backbone node is my nearest further node 
-																and within same tentacle
-
-									or	self.state is Reinforce
+		if self.state is Tip or self.state is Backbone and My position is nearest further node of the adjacent backbone node
+				or 	self.state is not Tip or self.state is not Backbone and the adjacent backbone node is my nearest further node and within same tentacle
+				or	self.state is Reinforce
 	    	
 			caculate profile
 	
@@ -43,3 +39,17 @@ for node in adjacent nodes
 
 		if self.state if Free
 			caculate profile
+
+
+condition = self.is_connected_with_destination + self.is_detecing_real_target + self.have_virtual_target
+						1								2								   4
+
+if condition == 3
+	caculate and add real target profile
+
+if condition == 5
+	caculate and add virtual target profile
+
+if condition == 7
+	caculate and add real target profile
+	caculate and add virtual target profile
